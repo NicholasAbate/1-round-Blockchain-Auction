@@ -1,6 +1,6 @@
 import random
 import math
-
+#DO NOT USE THIS FILE. AN UPDATED VERSION IS FOUND IN HEEncryption.py
 # Generate a random prime number of a given bit length
 def generate_prime(bit_length):
     while True:
