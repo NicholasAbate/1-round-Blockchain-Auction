@@ -12,28 +12,30 @@ contract WinnerDetermination {
         auction = Auction(_auctionAddress);
     }
 
-    function determineWinner(uint256[] calldata encryptedValues) view external {
-        require(encryptedValues.length == auction.maxParticipants(), "Invalid number of encrypted values");
+    function getWinner(uint256[] calldata encryptedValues) external view returns (uint256[2] memory) {
+        require(
+            encryptedValues.length == auction.maxParticipants(),
+            "Invalid number of encrypted values"
+        );
 
-        uint256 highestDecryptedValue = 0;
+        uint256 highestBid = encryptedValues[0];
 
-        for (uint256 i = 0; i < encryptedValues.length; i++) {
-            uint256 decryptedValue = decryptValue(encryptedValues[i]);
-            
-            if (decryptedValue - highestDecryptedValue > 0) {
-                highestDecryptedValue = decryptedValue;
-            } else if (decryptedValue == highestDecryptedValue) {
-                // What to do when there is a tie
-                continue;
-                
+        uint256 highestBidIndex = 0;
+
+        for (uint256 i = 1; i < encryptedValues.length; i++) {
+            uint256 encryptedValue = encryptedValues[i];
+            uint256 encryptedDifference = encryptedValue - highestBid;
+
+            if (decrypt(encryptedDifference) > 0) {
+                highestBid = encryptedValue;
+                highestBidIndex = i;
             }
         }
 
+        return [highestBid, highestBidIndex];
     }
 
-    function decryptValue(uint256 encryptedValue) internal pure returns (uint256) {
-        // Implement your decryption logic here
-        // This is just a placeholder, you should replace it with your actual decryption logic
+    function decrypt(uint256 encryptedValue) internal pure returns (uint256) {
         return encryptedValue;
     }
 }

@@ -28,19 +28,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "encryptedValues",
-						"type": "uint256[]"
-					}
-				],
-				"name": "determineWinner",
-				"outputs": [],
-				"stateMutability": "view",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -79,19 +66,19 @@
 			]
 		},
 		"contracts/Auction.sol": {
-			"keccak256": "0xe71287111c2f39feb3359b40f7f799bbff591a0a82326abed5b021c21f3fadfb",
+			"keccak256": "0x8eafd68cd8a2b90515a185a99f9608431a8d121ac7980012074852c65766c653",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c12569a22b2474dafac62feb7391a44d1701c4edf12ed78292f44baf1d5bad28",
-				"dweb:/ipfs/QmX9zSz6Bdx9Mvsp4Qkb7fbuC4EShbRmHyUW1WjbAMeWE6"
+				"bzz-raw://08f7a1f378540b39bbba8558ca4f5606839925464cfb4be6d7c5fa52ea67341c",
+				"dweb:/ipfs/QmWKT57iw4AoeY64VrGQ2xHzgXYCDjZ5v8JCcWxQXDwiA7"
 			]
 		},
 		"contracts/DetermineWinner.sol": {
-			"keccak256": "0x04c79d98b5f3e27a61f8b1e006b90a4328318ce329174753d561f536ed396276",
+			"keccak256": "0x5e9e8154c862f017bccb42d39031666e50ee1a10840057b2a7388a47991c493c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5c65ecc24593258a05eaf0d9183e5e0745c115d24e51d787ad9c8e9745ef9598",
-				"dweb:/ipfs/QmX4H73ah2qPq3XS6Fckn4EtRWCPkP3rSyXmrAFNf694bP"
+				"bzz-raw://efb9891686230a14504de6a9d19676dc8439a602c5c1968b4eb002923e7caae7",
+				"dweb:/ipfs/QmaJeKA9xZv3kUrzpQBtyUFbmTSZHewJTKgHH5hkCErTWM"
 			]
 		}
 	},

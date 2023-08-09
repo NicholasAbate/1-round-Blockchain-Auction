@@ -21,6 +21,16 @@
 						"internalType": "uint256",
 						"name": "_maxParticipants",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_erc1155Token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_erc1155TokenId",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -28,7 +38,20 @@
 			},
 			{
 				"anonymous": false,
-				"inputs": [],
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "winningBid",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					}
+				],
 				"name": "AuctionEnded",
 				"type": "event"
 			},
@@ -92,6 +115,32 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "erc1155Token",
+				"outputs": [
+					{
+						"internalType": "contract IERC1155",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "erc1155TokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -187,6 +236,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "reserveAmounts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "totalReserve",
 				"outputs": [
@@ -194,6 +262,19 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "winnerDeterminationInstance",
+				"outputs": [
+					{
+						"internalType": "contract WinnerDetermination",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -213,7 +294,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/auction.sol": "Auction"
+			"contracts/Auction.sol": "Auction"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -227,6 +308,14 @@
 		"remappings": []
 	},
 	"sources": {
+		"@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+			"keccak256": "0xcab667ddad478ff0d39c2053ca77fac778af8483c18ab07d810277b4216fd582",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://919c7ea27c77275c3c341da0c4a26a66a20ed27605fbe8becf11f58ec3bc65bf",
+				"dweb:/ipfs/QmRLKyVE2n7e2Jo4bLNn8eLgqqhNGYnVQyjJPWdr8poskf"
+			]
+		},
 		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0x287b55befed2961a7eabd7d7b1b2839cbca8a5b80ef8dcbb25ed3d4c2002c305",
 			"license": "MIT",
@@ -235,12 +324,28 @@
 				"dweb:/ipfs/QmPV3FGYjVwvKSgAXKUN3r9T9GwniZz83CxBpM7vyj2G53"
 			]
 		},
-		"contracts/auction.sol": {
-			"keccak256": "0xe71287111c2f39feb3359b40f7f799bbff591a0a82326abed5b021c21f3fadfb",
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c12569a22b2474dafac62feb7391a44d1701c4edf12ed78292f44baf1d5bad28",
-				"dweb:/ipfs/QmX9zSz6Bdx9Mvsp4Qkb7fbuC4EShbRmHyUW1WjbAMeWE6"
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"contracts/Auction.sol": {
+			"keccak256": "0x483295131942dc22fbbf695223ec3c75932147112bf1ede54ae94a88c273424b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f6839f7f427e30bd5a4422aa5b141c4365350164a45f5822761467eaa916b5a",
+				"dweb:/ipfs/QmVK3w4iQo1cKrdZfyCy87VZ9F4ko6koJ3rTmHasTaTx4e"
+			]
+		},
+		"contracts/DetermineWinner.sol": {
+			"keccak256": "0xac34c2120b54d78ef9a678cab064ff1ea100a9ad0dae9b035845f4f8dcd83e50",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb020143db1616f54b87dbbd97fcd8215a1a07877271b146a302542023eab0df",
+				"dweb:/ipfs/QmUt8ReWDgb71uBd4T9DRHD7CLQcRV8MKzWMD5ZyvLFAWJ"
 			]
 		}
 	},
