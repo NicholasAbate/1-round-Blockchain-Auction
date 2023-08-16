@@ -24,6 +24,7 @@ contract AuctionEth is ERC1155Receiver, Ownable {
     uint256 public totalReserve;
 
     bool public ended;
+    bool public started;
 
 
     // modifier onlyOwner() {
@@ -36,6 +37,11 @@ contract AuctionEth is ERC1155Receiver, Ownable {
         _;
     }
 
+    modifier onlyAfterStart(){
+        require(started);
+        _;
+    }
+
     event ParticipantJoined(address participant);
     event AuctionEnded(uint256 winningBid, address winner);
 
@@ -43,12 +49,17 @@ contract AuctionEth is ERC1155Receiver, Ownable {
         erc1155Token = MyERC1155Token(_erc1155Token); // Initialize your ERC1155 token contract
         erc1155TokenId = _erc1155TokenId; // Set ERC1155 token ID
         maxParticipants = _maxParticipants;
+        started = false;
+    }
+
+    function startAuction() external onlyOwner {
         // Transfer ERC1155 token to auction contract
         erc1155Token.safeTransferFrom(msg.sender, address(this), erc1155TokenId, 1, "");
+        started = true;
 
     }
 
-    function joinAuction() external payable onlyBeforeEnd {
+    function joinAuction() external payable onlyBeforeEnd onlyAfterStart {
         require(
             !participants[msg.sender].active,
             "You have already joined the auction."
@@ -69,14 +80,18 @@ contract AuctionEth is ERC1155Receiver, Ownable {
         emit ParticipantJoined(msg.sender);
     }
 
-    function endAuction() external onlyOwner onlyBeforeEnd {
+    function endAuction() external onlyOwner onlyBeforeEnd onlyAfterStart {
         ended = true;
 
-        uint256[2] memory winningValues = winnerDeterminationInstance.getWinner(
-            reserveAmounts
-        ); // Call determineWinner
-        uint256 winningBid = winningValues[0];
-        uint256 winningBidIndex = winningValues[1];
+        
+        uint256 winningBid = reserveAmounts[0];
+        uint256 winningBidIndex = 0;
+        for (uint i = 1; i < participantCount; i++) {
+            if (reserveAmounts[i] > winningBid) {
+                winningBid = reserveAmounts[i];
+                winningBidIndex = i;
+            }
+        }
         address winner = addressAtIndex[winningBidIndex];
 
         // Process the winner's coin

@@ -298,6 +298,26 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "startAuction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "started",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes4",
@@ -519,11 +539,11 @@
 			]
 		},
 		"contracts/AuctionWithEth.sol": {
-			"keccak256": "0x0b800620732dc4cf262272fe896a7bba3038fc2fed2f7077d3c8508fe79628ac",
+			"keccak256": "0x5bfb7debe644ad444ac98cd5babd7650c8a48512caf91625348f37a7ce803247",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dd489e78dc71fbb0e51b4d966c85532ef0923c8e93653d1a3056ba97dd1a5456",
-				"dweb:/ipfs/QmRCTT1KjUL3LPzHxL7bQHbEhNsQ4fhQcJbQkwCDo4Gnyy"
+				"bzz-raw://384ee62333ac5375b2e0f4e0ccd76f609b6cdde9931d8526a0d25a0068d37c0d",
+				"dweb:/ipfs/QmbgaMLHVHH42rer3tTtLwFgNPum8yUWk4j9PHyUsAJMWo"
 			]
 		},
 		"contracts/DetermineWinner.sol": {
